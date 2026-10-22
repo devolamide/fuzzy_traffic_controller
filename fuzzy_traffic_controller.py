@@ -15,11 +15,18 @@ emv_waiting_time_red_lane = ctrl.Antecedent(np.arange(0, 50, 1), 'emv_waiting_ti
 
 traffic_light_signal = ctrl.Consequent(np.arange(0, 2, 1), 'traffic_light_signal')
 
-no_vehicle_current_lane['too-small'] = fuzz.trimf(no_vehicle_current_lane.universe, [0, 0, 10])
-no_vehicle_current_lane['small'] = fuzz.trimf(no_vehicle_current_lane.universe, [5, 10, 15])
-no_vehicle_current_lane['much'] = fuzz.trimf(no_vehicle_current_lane.universe, [10, 15, 20])
-no_vehicle_current_lane['too-much'] = fuzz.smf(no_vehicle_current_lane.universe, 15, 20)
-# no_vehicle_current_lane.view()
+no_vehicle_current_lane['too-small'] = fuzz.trapmf(
+    no_vehicle_current_lane.universe, [0, 0, 4, 7]
+)
+no_vehicle_current_lane['small'] = fuzz.trimf(
+    no_vehicle_current_lane.universe, [4, 8, 12]
+)
+no_vehicle_current_lane['much'] = fuzz.trimf(
+    no_vehicle_current_lane.universe, [10, 14, 18]
+)
+no_vehicle_current_lane['too-much'] = fuzz.trapmf(
+    no_vehicle_current_lane.universe, [16, 18, 20, 20]
+)
 
 no_vehicle_other_lane['too-small'] = fuzz.trimf(no_vehicle_other_lane.universe, [0, 0, 10])
 no_vehicle_other_lane['small'] = fuzz.trimf(no_vehicle_other_lane.universe, [5, 10, 15])
